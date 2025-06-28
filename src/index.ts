@@ -549,7 +549,7 @@ server.registerTool(
     try {
       const auth = await authorize();
       const tasks = google.tasks({ version: "v1", auth });
-      await tasks.tasks.update({
+      await tasks.tasks.patch({
         tasklist: taskListId,
         task: taskId,
         requestBody: {
@@ -596,7 +596,7 @@ server.registerTool(
     try {
       const auth = await authorize();
       const tasks = google.tasks({ version: "v1", auth });
-      await tasks.tasks.update({
+      await tasks.tasks.patch({
         tasklist: taskListId,
         task: taskId,
         requestBody: {
@@ -619,6 +619,52 @@ server.registerTool(
           {
             type: "text",
             text: `Error reopening task: ${error.message}`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  }
+);
+
+// Register a tool "move-task"
+server.registerTool(
+  "move-task",
+  {
+    title: "Move Task",
+    description: "Move a task to a different task list",
+    inputSchema: {
+      taskListId: z.string().describe("ID of the current task list containing the task to move"),
+      taskId: z.string().describe("ID of the task to move"),
+      newTaskListId: z.string().describe("ID of the new task list to move the task to"),
+    },
+  },
+  async ({ taskListId, taskId, newTaskListId }) => {
+    try {
+      const auth = await authorize();
+      const tasks = google.tasks({ version: "v1", auth });
+      // Get the task details from the current task list
+      await tasks.tasks.move({
+        tasklist: taskListId,
+        task: taskId,
+        destinationTasklist: newTaskListId, // Move the task to the new task list
+      });
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Task with ID ${taskId} moved successfully from Task List ID ${taskListId} to Task List ID ${newTaskListId}.`,
+          },
+        ],
+        isError: false,
+      };
+    } catch (error: any) {
+      console.error("Error in move-task tool:", error);
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Error moving task: ${error.message}`,
           },
         ],
         isError: true,
