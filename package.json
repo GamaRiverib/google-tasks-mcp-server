@@ -1,0 +1,33 @@
+{
+  "name": "@gamariverib/google-tasks",
+  "version": "0.1.0",
+  "description": "Google Tasks MCP Server",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc && shx chmod +x build/*.js",
+    "prepare": "npm run build",
+    "dev": "tsc --watch",
+    "start": "node build/index.js"
+  },
+  "bin": {
+    "google-tasks": "build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "author": "José Gamaliel Rivera Ibarra (gama.rivera@gmail.com)",
+  "homepage": "https://gamarivera.dev",
+  "license": "Apache-2.0",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.0.5",
+    "shx": "^0.4.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
+    "@modelcontextprotocol/sdk": "^1.13.2",
+    "googleapis": "^150.0.1",
+    "zod": "^3.25.67"
+  }
+}
