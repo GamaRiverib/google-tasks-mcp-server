@@ -63,7 +63,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in list-task-lists tool:", error);
       return {
         content: [{ type: "text", text: `Error listing task lists: ${error.message}` }],
         isError: true,
@@ -102,7 +101,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in create-task-list tool:", error);
       return {
         content: [
           {
@@ -148,7 +146,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in update-task-list tool:", error);
       return {
         content: [
           {
@@ -189,7 +186,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in delete-task-list tool:", error);
       return {
         content: [
           {
@@ -232,7 +228,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in list-tasks tool:", error);
       return {
         content: [
           {
@@ -283,7 +278,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in search-tasks tool:", error);
       return {
         content: [
           {
@@ -337,7 +331,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in create-task tool:", error);
       return {
         content: [
           {
@@ -381,7 +374,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in get-task tool:", error);
       return {
         content: [
           {
@@ -436,7 +428,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in update-task tool:", error);
       return {
         content: [
           {
@@ -479,7 +470,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in delete-task tool:", error);
       return {
         content: [
           {
@@ -520,7 +510,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in clear-tasks tool:", error);
       return {
         content: [
           {
@@ -567,7 +556,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in complete-task tool:", error);
       return {
         content: [
           {
@@ -613,7 +601,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in reopen-task tool:", error);
       return {
         content: [
           {
@@ -659,7 +646,6 @@ server.registerTool(
         isError: false,
       };
     } catch (error: any) {
-      console.error("Error in move-task tool:", error);
       return {
         content: [
           {
@@ -733,7 +719,7 @@ async function main() {
   await authorize();
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Google Tasks MCP Server running on stdio");
+  console.error("📝 Google Tasks MCP Server running on stdio");
 }
 
 main().catch((error) => {
